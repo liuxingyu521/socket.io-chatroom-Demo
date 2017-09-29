@@ -6,7 +6,7 @@
 
 * 服务端先安装npm包 `npm install socket.io`
 * 然后在服务端代码里使用
-```
+```js
 var server = require('http').createServer();
 var io = require('socket.io')(server);
 

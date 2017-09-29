@@ -7,6 +7,21 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+	<div class="container loginBox">
+		<div class="page-header">
+		  <h1>欢迎来到socket聊天室</h1>
+		</div>
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4">
+				<div class="login-form">
+					<h4>请输入您的昵称:</h4>
+					<input type="text" class="form-control">
+					<button class="btn btn-primary">提交</button>
+					<div class="tips">昵称不能为空...</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="container chatroom">
 		<div class="row">
 			<div class="col-md-6">
@@ -14,7 +29,7 @@
 					<h3>基于WebSocket应用的聊天室</h3>
 					<div class="count-tips">
 						<p>当前在线人数：<span class="cur-count">0</span></p>
-						<p>当前用户：<span class="cur-user">张三</span></p>
+						<p>当前用户：<span class="cur-user"></span></p>
 					</div>
 				</div>
 			</div>
@@ -39,8 +54,8 @@
 							</div>
 							<div class="input-area">
 								<form action="javascript:void(0)" class="form-inline">
-									<input type="text" class="form-control"/>
-									<button class="btn btn-default">发送</button>
+									<input type="text" class="form-control" placeholder="发送内容不能为空">
+									<button class="btn btn-primary">发送</button>
 								</form>
 							</div>
 						</div>
@@ -67,6 +82,8 @@
 						// 初始化用户信息
 						this.cur_user.userName = username;
 						this.cur_user.userId = calcUserId();
+						// 展示当前用户
+						$(this.chatDom).find('.cur-user').text(this.cur_user.userName);
 
 						// 建立socket连接
 						this.socket = io('ws://localhost:9000');
@@ -152,13 +169,31 @@
 				return _chat;
 			})();
 
+			// 用户登录
+			$('.login-form button').click(function(){
+				var userName = $('.login-form .form-control').val();
+				if(userName == ''){
+					$('.login-form .tips').css({display: 'block'});
+					return;
+				}
+				// 隐藏登录dom，展示聊天dom
+				$('.loginBox').css({display: 'none'});
+				$('.chatroom').css({display: 'block'});
 
+				// 初始化聊天室
+				CHAT.init(userName);
+			})
 
-			window.CHAT.init('张三');
+			// input聚焦时，隐藏tips
+			$('.login-form .form-control').focus(function(){
+				$('.login-form .tips').css({display: 'none'});
+			})
 
+			// 点击发送消息按钮
 			$('.input-area button').click(function(){
-				var msg = $('.input-area .form-control').val();
+				var msg = $('.input-area .form-control').val().replace(/\s/g, '');
 				if(msg == ''){
+					$('.input-area .form-control').val('');
 					return false;
 				}
 				// 清楚输入框内容
