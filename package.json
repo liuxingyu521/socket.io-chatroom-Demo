@@ -1,0 +1,29 @@
+{
+  "name": "chatroom-demo-socket.io",
+  "version": "1.0.0",
+  "description": "A chatroom demo set up by socket.io",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liuxingyu521/socket.io-chatroom-Demo.git"
+  },
+  "keywords": [
+    "socket.io",
+    "node",
+    "websocket",
+    "chatroom"
+  ],
+  "author": "Richard",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/liuxingyu521/socket.io-chatroom-Demo/issues"
+  },
+  "homepage": "https://github.com/liuxingyu521/socket.io-chatroom-Demo#readme",
+  "dependencies": {
+    "express": "^4.16.0",
+    "socket.io": "^2.0.3"
+  }
+}
