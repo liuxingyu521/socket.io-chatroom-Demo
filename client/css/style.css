@@ -1,7 +1,7 @@
 body{
-	background-color: #f9f9cd;
   background-image: url(../img/login-bg.jpg);
   background-size: cover;
+  background-repeat: no-repeat;
 }
 .loginBox{
   margin-top: 100px;
